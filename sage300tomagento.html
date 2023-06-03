@@ -1,0 +1,812 @@
+<html>
+
+<head>
+    <style>
+        * {
+            margin-left: 5px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 5px;
+        }
+
+        /*         .sage300{
+            position: absolute;
+            top: 100px;
+            left: 10px;
+        }
+        .magento{
+            position: absolute;
+            top: 100px;
+            left: 400px;
+        }
+        .container{
+            position: absolute;
+            top: 200px;
+            left: 400px;
+        } */
+        .magento {
+            margin-left: 70px;
+        }
+
+        .ServerStatus {
+            margin-left: 600px;
+
+        }
+
+        .Goback {
+            margin-left: 40px;
+        }
+
+        .myData {
+            height: 300px;
+            width: 1300px;
+            overflow: scroll;
+        }
+
+        .myData1 {
+            height: 300px;
+            width: 1300px;
+            overflow: scroll;
+            margin-top: 20px;
+        }
+
+        .containerdata {
+            display: flex;
+            padding: 10px;
+            background-color: rgb(233, 230, 230);
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        /* #btntestdata {
+            background-color: white;
+            border-radius: 6px;
+        }
+
+        #btndownload {
+            background-color: white;
+            border-radius: 6px;
+        } */
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* tr:nth-child(even) {background-color: #f2f2f2;} */
+        /* .Goback {
+            text-decoration: none;
+            background-color: rgb(228, 94, 94);
+            color: #f2f2f2;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 10px;
+
+        } */
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #0c4173;
+
+            position: relative;
+            animation-name: SpinnerAnimationEx;
+            animation-duration: 3s;
+            border-radius: 100px;
+            animation-iteration-count: infinite;
+            animation-direction: alternate-reverse;
+            z-index: 2;
+        }
+
+        @keyframes SpinnerAnimationEx {
+            0% {
+                background-color: #0c4173;
+                left: 0px;
+                top: 0px;
+            }
+
+            25% {
+                background-color: white;
+                left: 20px;
+                top: 0px;
+            }
+
+            50% {
+                background-color: #0c4173;
+                left: 40px;
+                top: 0px;
+            }
+
+            75% {
+                background-color: white;
+                left: 60px;
+                top: 0px;
+            }
+
+            100% {
+                background-color: #0c4173;
+                left: 80px;
+                top: 0px;
+            }
+        }
+
+        .spinner {
+            position: fixed;
+            top: 250px;
+            left: 650px;
+        }
+
+        .Processing {
+            font-size: 20px;
+            color: #0c4173;
+        }
+
+        .status1 {
+            position: absolute;
+            top: 15px;
+            left: 400px;
+        }
+
+        .status2 {
+            position: absolute;
+            top: 90px;
+            left: 400px;
+        }
+
+        .status3 {
+            position: absolute;
+            top: 165px;
+            left: 400px;
+        }
+
+        .status4 {
+            position: absolute;
+            top: 240px;
+            left: 400px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="spinner" id="newspinner">
+        <div id="pageLoadingBg"></div>
+        <div class="dot"></div>
+        <div class="Processing">Processing</div>
+    </div>
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalSage300" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sage 300</h4>
+                    </div>
+                    <!-- <div class="modal-body">
+                        <Label>WebserviceUrl :</Label><br>
+                        <input type="text" placeholder="WebserviceUrl"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="SourceWebserviceUrl"><br><br>
+                        <Label>User :</Label><br>
+                        <input type="text" placeholder="User"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="SourceUser"><br><br>
+                        <Label>CompanyId :</Label><br>
+                        <input type="text" placeholder="CompanyId"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="SourceCompanyId"><br><br>
+                        <Label>Password :</Label><br>
+                        <input type="password" placeholder="Password"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="SourcePassword"><br><br>
+                    </div> -->
+                    <div class="modal-body" id="sourceErp">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalMagento" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Magento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <Label>Web Service IP / Domain:</Label><br>
+                        <input type="text" placeholder="Web Service IP / Domain"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetWebServiceIPDomain"><br><br>
+
+                        <!-- <Label>Store :</Label><br>
+                        <input type="text" placeholder="Store"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="magentoStore"><br><br> -->
+
+                        <Label>Port :</Label><br>
+                        <input type="text" placeholder="Port"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetPort"><br><br>
+
+                        <Label>Consumer Secret:</Label><br>
+                        <input type="text" placeholder="Consumer Secret"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetConsumerSecret"><br><br>
+
+                        <Label>Access Token Secret:</Label><br>
+                        <input type="text" placeholder="Access Token Secret"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetAccessTokenSecret"><br><br>
+
+                        <!-- <Label>Company ID:</Label><br>
+                        <input type="text" placeholder="Company ID"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="magentoCompanyID"><br><br> -->
+
+                        <Label>HTTPS:</Label><br>
+                        <input type="text" placeholder="HTTPS"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetHTTPS"><br><br>
+
+                        <Label>Consumer Key:</Label><br>
+                        <input type="text" placeholder="Consumer Key"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetConsumerKey"><br><br>
+
+                        <Label>Access Token:</Label><br>
+                        <input type="text" placeholder="Access Token"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                            id="TargetAccessToken"><br><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalServerStatus" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ServerStatus</h4>
+                    </div>
+                    <div class="modal-body">
+                        <Label>URL1 :</Label><br>
+                        <input type="text" placeholder="URL1"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;" id="URL1"><br><br>
+
+                        <div class="status1">
+                            <Label>Status :</Label><br>
+                            <input type="text" placeholder="Status1"
+                                style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                                id="Status1"><br><br>
+                        </div>
+
+
+                        <Label>URL2 :</Label><br>
+                        <input type="text" placeholder="URL2"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;" id="URL2"><br><br>
+
+
+                        <div class="status2">
+                            <Label>Status :</Label><br>
+                            <input type="text" placeholder="Status2"
+                                style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                                id="Status2"><br><br>
+                        </div>
+
+                        <Label>URL3 :</Label><br>
+                        <input type="text" placeholder="URL3"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;" id="URL3"><br><br>
+
+                        <div class="status3">
+                            <Label>Status :</Label><br>
+                            <input type="text" placeholder="Status3"
+                                style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                                id="Status3"><br><br>
+                        </div>
+
+
+                        <!--                         <Label>URL4 :</Label><br>
+                        <input type="text" placeholder="URL4"
+                            style="background-color: rgb(243, 236, 236); border: none; height: 30px;" id="URL4"><br><br>
+
+
+                        <div class="status4">
+                            <Label>Status :</Label><br>
+                            <input type="text" placeholder="Status4"
+                                style="background-color: rgb(243, 236, 236); border: none; height: 30px;"
+                                id="Status4"><br><br>
+                        </div> -->
+                        <button class="btn btn-danger" onclick="checkserverstatus()">Check Status</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="containerdata">
+
+        <div class="sage300">
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalSage300"> <span
+                    class="glyphicon glyphicon-cog"></span>&nbsp; Sage300</button>
+        </div>
+        <div class="magento">
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalMagento"> <span
+                    class="glyphicon glyphicon-cog"></span>&nbsp; Magento</button>
+        </div>
+        <div class="ServerStatus">
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalServerStatus">
+                <span class="glyphicon glyphicon-cog"></span>&nbsp; ServerStatus</button>
+        </div>
+        <div class="Goback">
+            <button type="button" class="btn btn-success btn-lg" onclick="Goback()">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Go Back</button>
+        </div>
+    </div>
+    <br>
+    <!-- <button onclick="Goback()" class="Goback">Go Back</button> -->
+    <label for="pagesize" style="margin-left: 10px;">PageSize :</label>
+    <input type="number" style="width: 90px;" placeholder="PageSize" id="SourcepageSize">
+    <label for="next" style="margin-left: 10px;">Next :</label>
+    <input type="number" style="width: 90px;" placeholder="Next" id="Sourcenext">
+    <label for="lastSyncDate" style="margin-left: 10px;">Last Sync Date : </label>
+    <input type="date" id="SourcelastSyncDate">
+    <br><br>
+    <label for="Entities">Entities :</label>
+    <select id="Entities">
+        <option value="customers">customers</option>
+        <option value="products">products</option>
+        <option value="orders">orders</option>
+        <option value="invoices ">invoices </option>
+    </select><br><br>
+
+    <!-- <button id="btntestdata" onclick="convert( )"> Test Data </button> <br><br> -->
+
+    <button id="btntestdata" onclick="Mydata( )" class="btn btn-success "><span
+            class="glyphicon glyphicon-play-circle"></span>&nbsp; Test Data </button>
+    <button id="btndownload" onclick="DownloadCsv()" class="btn btn-success "><span
+            class="glyphicon glyphicon-download-alt"></span>&nbsp; Download </button> <br><br>
+    <!-- <p>Source Sage300 : Grey </p>
+    <p>Target Magento : White </p> -->
+
+    <h4>Source : Sage 300</h4>
+    <div class="myData">
+        <div id="container"></div>
+    </div>
+    <br>
+    <h4>Target : Magento</h4>
+    <div class="myData1">
+        <div id="container1"></div>
+    </div>
+    <script>
+        debugger;
+        const urlParams = new URLSearchParams(window.location.search);
+        const greetingValue = urlParams.get('greeting');
+        console.log(greetingValue);
+        document.getElementById("Status1").readOnly = true;
+        document.getElementById("Status2").readOnly = true;
+        document.getElementById("Status3").readOnly = true;
+
+        function checkserverstatus() {
+            //document.getElementById('newspinner').style.display = "Block";
+            var URL1 = document.getElementById("URL1").value;
+            var URL2 = document.getElementById("URL2").value;
+            var URL3 = document.getElementById("URL3").value;
+
+            /* URL1 = "http://gumunredstaging.greytrix.com:1881/";
+            URL2 = "http://202.189.228.190:4490/";
+            URL3 = "http://202.189.238.190:4490/"; */
+
+            var myData = [
+                {
+                    "url": URL1
+                }
+                ,
+                {
+                    "url": URL2
+                },
+                {
+                    "url": URL3
+                }
+
+            ];
+
+            var json = JSON.stringify(myData);
+            debugger;
+            $.ajax({
+                url: "http://gumunredstaging.greytrix.com:1881/qcautomation_serverstatus",
+                type: "POST",
+                data: json,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    console.log(response);
+                    for (var i = 0; i <= response.length; i++) {
+                        if (response[i].url == URL1) {
+                            document.getElementById("Status1").value = response[i].res;
+                        }
+                        if (response[i].url == URL2) {
+                            document.getElementById("Status2").value = response[i].res;
+                        }
+                        if (response[i].url == URL3) {
+                            document.getElementById("Status3").value = response[i].res;
+                        }
+
+                    }
+                    //document.getElementById('newspinner').style.display = "None";
+                },
+                error: function (message) {
+                    debugger;
+                    console.log(message);
+
+                }
+            });
+
+        }
+
+
+        document.getElementById('newspinner').style.display = "None";
+        var csv_data = [];
+        var newTestData1 = [];
+        var newTestData2 = [];
+
+        function Goback() {
+            history.back();
+        }
+
+        function TestData1() {
+            var Entities = document.getElementById('Entities').value;
+
+            var SourceWebserviceUrl = document.getElementById('SourceWebserviceUrl').value;
+            var SourceUser = document.getElementById('SourceUser').value;
+            //var sage300HTTPS = document.getElementById('sage300HTTPS').value;
+            var SourceCompanyId = document.getElementById('SourceCompanyId').value;
+            var SourcePassword = document.getElementById('SourcePassword').value;
+            //var sage300Port = document.getElementById('sage300Port').value;
+
+            var SourcepageSize = document.getElementById('SourcepageSize').value;
+            var Sourcenext = document.getElementById('Sourcenext').value;
+            var SourcelastSyncDate = document.getElementById('SourcelastSyncDate').value;
+
+
+
+            SourceWebserviceUrl = "http://49.248.14.237:8261/Sage300WebApi/v1.0/-/";
+            SourceUser = "WEBAPI";
+            //var sage300HTTPS = document.getElementById('sage300HTTPS').value;
+            SourceCompanyId = "SAMINC";
+            SourcePassword = "ADMIN123";
+            //var sage300Port = document.getElementById('sage300Port').value;
+
+            /*             SourcepageSize = "";
+                        Sourcenext = "";
+                        SourcelastSyncDate = ""; */
+
+
+
+
+            var TargetWebServiceIPDomain = document.getElementById('TargetWebServiceIPDomain').value;
+            //var magentoStore = document.getElementById('magentoStore').value;
+            var TargetPort = document.getElementById('TargetPort').value;
+            var TargetConsumerSecret = document.getElementById('TargetConsumerSecret').value;
+            var TargetAccessTokenSecret = document.getElementById('TargetAccessTokenSecret').value;
+            //var magentoCompanyID = document.getElementById('magentoCompanyID').value;
+            var TargetHTTPS = document.getElementById('TargetHTTPS').value;
+            var TargetConsumerKey = document.getElementById('TargetConsumerKey').value;
+            var TargetAccessToken = document.getElementById('TargetAccessToken').value;
+
+            TargetWebServiceIPDomain = "http://49.248.14.237:8229";
+            //var magentoStore = document.getElementById('magentoStore').value;
+            TargetPort = "8229";
+            TargetConsumerSecret = "k2bkbw42r07dtnvtl7hjooc085v000sd";
+            TargetAccessTokenSecret = "1s78vea6i6ty6ds7b7emkv3s0a3uaurg";
+            //var magentoCompanyID = document.getElementById('magentoCompanyID').value;
+            TargetHTTPS = false;
+            TargetConsumerKey = "ihwrartbkfxsr1yvvuls3oor8b5m4xx6";
+            TargetAccessToken = "mnj47pg9rx6dsvhm0fox6sg78lganc0e";
+
+            debugger;
+            $.ajax({
+                url: "http://gumunredstaging.greytrix.com:1881/qcautomation",
+                type: "GET",
+                headers: {
+                    'entity': `${Entities}`,
+                    "settings_source": "{\"plugin\":\"Sage300c\",\"WebserviceUrl\":\"" + SourceWebserviceUrl + "\",\"CompanyId\":\"" + SourceCompanyId + "\",\"User\":\"" + SourceUser + "\",\"Password\":\"" + SourcePassword + "\",\"pageSize\":\"" + SourcepageSize + "\",\"next\":\"" + Sourcenext + "\",\"lastSyncDate\":\"" + SourcelastSyncDate + "\"}",
+                    "settings_target": "{\"plugin\":\"Magento\",\"WebserviceUrl\":\"" + TargetWebServiceIPDomain + "\",\"PORT\":\"" + TargetPort + "\",\"" + TargetHTTPS + "\":false,\"ConsumerKey\":\"" + TargetConsumerKey + "\",\"ConsumerSecret\":\"" + TargetConsumerSecret + "\",\"AccessToken\":\"" + TargetAccessToken + "\",\"AccessTokenSecret\":\"" + TargetAccessTokenSecret + "\",\"offset\":13}"
+                }
+                ,
+                data: {
+
+                },
+                success: function (response) {
+                    debugger;
+                    console.log(response);
+                    newTestData1 = response;
+                    //newTestData1 = response;
+                    convert(newTestData1.source);
+                    convert1(newTestData1.target);
+                    document.getElementById('newspinner').style.display = "None";
+                    alert("Data fetch successfully !");
+                },
+                error: function (message) {
+                    debugger;
+                    console.log(message);
+
+                }
+            });
+        }
+
+        function TestData2() {
+            var Entities = document.getElementById('Entities').value;
+
+            var SourceWebserviceUrl = document.getElementById('SourceWebserviceUrl').value;
+            var SourceUser = document.getElementById('SourceUser').value;
+            //var sage300HTTPS = document.getElementById('sage300HTTPS').value;
+            var SourceCompanyId = document.getElementById('SourceCompanyId').value;
+            var SourcePassword = document.getElementById('SourcePassword').value;
+            //var sage300Port = document.getElementById('sage300Port').value;
+
+            var TargetWebServiceIPDomain = document.getElementById('TargetWebServiceIPDomain').value;
+            //var magentoStore = document.getElementById('magentoStore').value;
+            var TargetPort = document.getElementById('TargetPort').value;
+            var TargetConsumerSecret = document.getElementById('TargetConsumerSecret').value;
+            var TargetAccessTokenSecret = document.getElementById('TargetAccessTokenSecret').value;
+            //var magentoCompanyID = document.getElementById('magentoCompanyID').value;
+            var TargetHTTPS = document.getElementById('TargetHTTPS').value;
+            var TargetConsumerKey = document.getElementById('TargetConsumerKey').value;
+            var TargetAccessToken = document.getElementById('TargetAccessToken').value;
+
+
+            debugger;
+            $.ajax({
+                url: "http://gumunredstaging.greytrix.com:1881/qcautomation",
+                type: "GET",
+                headers: {
+                    'entity': `${Entities}`,
+                    "settings_source": "{\"WebserviceUrl\":\"http://49.248.14.237:8261/Sage300WebApi/v1.0/-/\",\"CompanyId\":\"SAMINC\",\"User\":\"WEBAPI\",\"Password\":\"ADMIN123\"}",
+                    "settings_target": "{\"WebserviceUrl\":\"http://49.248.14.237:8229\",\"PORT\":\"8229\",\"HTTPS\":false,\"ConsumerKey\":\"ihwrartbkfxsr1yvvuls3oor8b5m4xx6\",\"ConsumerSecret\":\"k2bkbw42r07dtnvtl7hjooc085v000sd\",\"AccessToken\":\"mnj47pg9rx6dsvhm0fox6sg78lganc0e\",\"AccessTokenSecret\":\"1s78vea6i6ty6ds7b7emkv3s0a3uaurg\",\"offset\":13}"
+                }
+                ,
+                data: {
+
+                },
+                success: function (response) {
+                    debugger;
+                    console.log(response);
+
+                },
+                error: function (message) {
+                    debugger;
+                    console.log(message);
+
+                }
+            });
+        }
+
+        function Mydata() {
+            document.getElementById('newspinner').style.display = "Block";
+            TestData1();
+
+        }
+
+        // Function to convert JSON data to HTML table
+        function convert1(newTestData1) {
+            debugger;
+            // Get the container element where the table will be inserted
+            let container = document.getElementById("container1");
+
+            // Create the table element
+            let table = document.createElement("table");
+            table.setAttribute("id", "demoid1");
+
+            // Get the keys (column names) of the first object in the JSON data
+            let cols = Object.keys(newTestData1[0]);
+
+            // Create the header element
+            let thead = document.createElement("thead");
+            let tr = document.createElement("tr");
+
+            // Loop through the column names and create header cells
+            cols.forEach((item) => {
+                let th = document.createElement("th");
+                th.innerText = item; // Set the column name as the text of the header cell
+                tr.appendChild(th); // Append the header cell to the header row
+            });
+            thead.appendChild(tr); // Append the header row to the header
+            table.append(tr) // Append the header to the table
+
+            // Loop through the JSON data and create table rows
+            newTestData1.forEach((item) => {
+                let tr = document.createElement("tr");
+
+                // Get the values of the current object in the JSON data
+                let vals = Object.values(item);
+
+                // Loop through the values and create table cells
+                vals.forEach((elem) => {
+                    let td = document.createElement("td");
+                    td.innerText = elem; // Set the value as the text of the table cell
+                    tr.appendChild(td); // Append the table cell to the table row
+                });
+                table.appendChild(tr); // Append the table row to the table
+            });
+            container.appendChild(table) // Append the table to the container element
+        }
+
+        function convert(newTestData1) {
+            debugger;
+            // Get the container element where the table will be inserted
+            let container = document.getElementById("container");
+
+            // Create the table element
+            let table = document.createElement("table");
+            table.setAttribute("id", "demoid");
+
+            // Get the keys (column names) of the first object in the JSON data
+            let cols = Object.keys(newTestData1[0]);
+
+            // Create the header element
+            let thead = document.createElement("thead");
+            let tr = document.createElement("tr");
+
+            // Loop through the column names and create header cells
+            cols.forEach((item) => {
+                let th = document.createElement("th");
+                th.innerText = item; // Set the column name as the text of the header cell
+                tr.appendChild(th); // Append the header cell to the header row
+            });
+            thead.appendChild(tr); // Append the header row to the header
+            table.append(tr) // Append the header to the table
+
+            // Loop through the JSON data and create table rows
+            newTestData1.forEach((item) => {
+                let tr = document.createElement("tr");
+
+                // Get the values of the current object in the JSON data
+                let vals = Object.values(item);
+
+                // Loop through the values and create table cells
+                vals.forEach((elem) => {
+                    let td = document.createElement("td");
+                    td.innerText = elem; // Set the value as the text of the table cell
+                    tr.appendChild(td); // Append the table cell to the table row
+                });
+                table.appendChild(tr); // Append the table row to the table
+            });
+            container.appendChild(table) // Append the table to the container element
+        }
+
+        function downloadCSVFile(csv_data) {
+
+            // Create CSV file object and feed our
+            // csv_data into it
+            CSVFile = new Blob([csv_data], { type: "text/csv" });
+
+            // Create to temporary link to initiate
+            // download process
+            var temp_link = document.createElement('a');
+
+            // Download csv file
+            temp_link.download = "TestedData.csv";
+            var url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+
+            // Automatically click the link to trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
+        function tableToCSV() {
+
+            // Variable to store the final csv data
+
+
+            // Get each row data
+            var rows = document.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+
+                // Get each column data
+                var cols = rows[i].querySelectorAll('td,th');
+
+                // Stores each csv row data
+                var csvrow = [];
+                for (var j = 0; j < cols.length; j++) {
+
+                    // Get the text data of each cell of
+                    // a row and push it to csvrow
+                    csvrow.push(cols[j].innerHTML);
+                }
+
+                // Combine each column value with comma
+                csv_data.push(csvrow.join(","));
+            }
+            // combine each row data with new line character
+            csv_data = csv_data.join('\n');
+
+            /* We will use this function later to download
+            the data in a csv file downloadCSVFile(csv_data);
+            */
+        }
+        function DownloadCsv() {
+            tableToCSV();
+            downloadCSVFile(csv_data);
+        }
+        function compareHtmlTables(table1Id, table2Id) {
+            var table1 = document.getElementById(table1Id);
+            var table2 = document.getElementById(table2Id);
+
+            if (!table1 || !table2) {
+                console.log("Error: Table not found.");
+                return;
+            }
+
+            var rows1 = table1.getElementsByTagName('tr');
+            var rows2 = table2.getElementsByTagName('tr');
+
+            if (rows1.length !== rows2.length) {
+                console.log("Error: Tables have different row counts.");
+                return;
+            }
+
+            for (var i = 0; i < rows1.length; i++) {
+                var cells1 = rows1[i].getElementsByTagName('td');
+                var cells2 = rows2[i].getElementsByTagName('td');
+
+                if (cells1.length !== cells2.length) {
+                    console.log("Error: Tables have different column counts in row " + (i + 1) + ".");
+                    return;
+                }
+
+                for (var j = 0; j < cells1.length; j++) {
+                    if (cells1[j].textContent !== cells2[j].textContent) {
+                        console.log("Difference found in row " + (i + 1) + ", column " + (j + 1) + ".");
+                        // You can perform further actions or comparisons here
+                    }
+                }
+            }
+
+            console.log("Tables are identical.");
+        }
+
+    </script>
+</body>
+
+</html>

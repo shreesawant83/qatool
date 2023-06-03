@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .singleConnector {
+            display: inline-flex;
+            padding: 70px;
+            background-color: rgb(206, 201, 201);
+            margin-left: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>QA Tool</h1>
+    <div class="Connectors">
+
+    </div>
+    <script>
+        var divArray = new Array("Sage300 To Magento", "Sagex3 To Magento", "Sage CRM To Sage 100");
+        //var divLinks = new Array("https://www.google.com/", "https://www.w3schools.com/", "https://github.com/");
+        var divLinks = new Array("sage300tomagento.html", "sagex3tomagento.html");
+        
+        console.log(divArray);
+
+        for (var i = 0; i < divArray.length; i++) {
+            const Div = document.createElement("div");
+            const para = document.createElement("h3");
+            para.innerHTML = divArray[i];
+            Div.appendChild(para);
+            Div.setAttribute("class", "singleConnector");
+            document.getElementsByClassName('Connectors')[0].appendChild(Div);
+            const mybr = document.createElement('br');
+            Div.appendChild(mybr);
+
+            const a = document.createElement("a");
+            var linkText = document.createTextNode("View More");
+            a.appendChild(mybr);
+            a.appendChild(linkText);
+            a.href = `./${divLinks[i]}?greeting=hello`;
+            a.style.textDecoration = "None";
+            a.style.color = "white";
+            a.style.backgroundColor = "Red";
+            a.style.borderRadius = "10px";
+            a.style.margin = "inherit";
+            a.style.padding = "2px";
+            Div.appendChild(a);
+        }
+    </script>
+</body>
+
+</html>
